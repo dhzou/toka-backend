@@ -1,10 +1,10 @@
 import React from 'react'
-import { withRouter, Switch, Redirect } from 'react-router-dom'
+import { withRouter, Switch, Redirect ,HashRouter, hashHistory} from 'react-router-dom'
 import LoadableComponent from '../../utils/LoadableComponent'
 import PrivateRoute from '../PrivateRoute'
 
 const Home = LoadableComponent(()=>import('../../routes/Home/index'))  //参数一定要是函数，否则不会懒加载，只会代码拆分
-
+const UserDetail = LoadableComponent(()=>import ('../../routes/user/detail'));
 //关于
 const About = LoadableComponent(()=>import('../../routes/About/index'))
 
@@ -19,6 +19,7 @@ class ContentMain extends React.Component {
       <div style={{padding: 16, position: 'relative'}}>
         <Switch>
           <PrivateRoute exact path='/home' component={Home}/>
+           <PrivateRoute exact path='/home/user/detail' component={UserDetail}/>
           <PrivateRoute exact path='/home/banner/list' component={bannerList}/>
           <PrivateRoute exact path='/home/about' component={About}/>
           <Redirect exact from='/' to='/home'/>
